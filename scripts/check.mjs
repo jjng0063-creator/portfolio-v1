@@ -17,6 +17,7 @@ import {
   isSafeColor,
   normalizeMode,
 } from '../src/lib/theme.js'
+import { whatsappUrl } from '../src/lib/contact.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const read = p => readFileSync(join(root, p), 'utf8')
@@ -240,6 +241,40 @@ await check('a real run comes back with the fields the banner reads', async () =
   assert.equal(result.run.sha, 'abc123', 'the banner matches on sha to ignore older runs')
   assert.equal(result.run.status, 'completed')
   assert.equal(result.run.conclusion, 'success')
+})
+
+console.log('\ncontact channels')
+
+await check('a full international number becomes a wa.me link', () => {
+  assert.equal(whatsappUrl('+60 12-345 6789'), 'https://wa.me/60123456789')
+  assert.equal(whatsappUrl('60123456789'), 'https://wa.me/60123456789')
+})
+
+await check('a local number with a trunk zero is refused, not misrouted', () => {
+  // '012-345 6789' would strip to '0123456789', which wa.me resolves to a
+  // different subscriber or to nothing at all. Better to show no channel.
+  assert.equal(whatsappUrl('012-345 6789'), null)
+})
+
+await check('junk and out-of-range values are refused', () => {
+  const bad = ['', '   ', 'call me', '+60 12', '1'.repeat(16), null, undefined, 12345678]
+  for (const value of bad) {
+    assert.equal(whatsappUrl(value), null, JSON.stringify(value) + ' should not link')
+  }
+})
+
+await check('the stored whatsapp number is either empty or usable', () => {
+  const value = site.contact.whatsapp
+  assert.ok(
+    value === undefined || typeof value === 'string',
+    'contact.whatsapp must be a string when present'
+  )
+  if (value) {
+    assert.ok(
+      whatsappUrl(value),
+      'site.json carries a whatsapp number the site will silently drop; use international format'
+    )
+  }
 })
 
 console.log('\ncontent file')
