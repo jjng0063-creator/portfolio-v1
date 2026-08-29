@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Ng Jun Jie — Computer Science Student & Developer",
-    "description": "Final-year Computer Science student at UTAR building mobile and full-stack systems — face-recognition attendance, community platforms, management systems. Available for internship Oct 2026 — Jan 2027.",
-    "ogTitle": "Ng Jun Jie — Computer Science Student & Developer",
-    "ogDescription": "Final-year Computer Science student at UTAR building mobile and full-stack systems. Available for internship Oct 2026 — Jan 2027.",
+    "title": "Ng Jun Jie - Computer Science Student & Developer",
+    "description": "Final-year Computer Science student at UTAR building mobile and full-stack systems: face-recognition attendance, community platforms, management systems. Available for internship Oct 2026 to Jan 2027.",
+    "ogTitle": "Ng Jun Jie - Computer Science Student & Developer",
+    "ogDescription": "Final-year Computer Science student at UTAR building mobile and full-stack systems. Available for internship Oct 2026 to Jan 2027.",
     "ogImage": null,
     "siteUrl": "https://jjng0063-creator.github.io/portfolio/"
   },
@@ -11,11 +11,11 @@
     "name": "Ng Jun Jie",
     "role": "Final-Year Computer Science Student",
     "location": "Gelugor, Penang, Malaysia",
-    "availability": "Available for internship · 19 Oct 2026 — 16 Jan 2027",
-    "tagline": "Computer Science undergraduate at UTAR, building mobile and full-stack systems — from a face-recognition attendance app to community resource-sharing platforms.",
+    "availability": "Available 19 Oct 2026 to 16 Jan 2027",
+    "tagline": "Computer Science undergraduate at UTAR building mobile and full-stack systems, from face-recognition attendance to community resource sharing.",
     "about": [
       "I am a final-semester Computer Science student at Universiti Tunku Abdul Rahman with a broad foundation across Python, Java, C++, PHP and JavaScript. Most of what I have built has been end to end: a mobile or web front end, a backend I wrote myself, and a database schema designed around the problem rather than bolted on afterwards.",
-      "My final year project pushed that furthest — a React Native attendance system backed by Python, using YuNet for face detection, ArcFace for recognition, and an anti-spoofing model to stop fraudulent check-ins. I am now looking for an internship where I can apply that analytical and problem-solving work in a professional team and keep learning quickly."
+      "My final year project pushed that furthest: a React Native attendance system backed by Python, using YuNet for face detection, ArcFace for recognition, and an anti-spoofing model to stop fraudulent check-ins. I am now looking for an internship where I can apply that analytical and problem-solving work in a professional team and keep learning quickly."
     ],
     "photo": "uploads/mt3dqu5x-whatsapp-image-2026-08-22-at-4.05.09-am.jpeg",
     "resumeUrl": "uploads/mt3dhcma-resume-cs-last-semester-intern-ng-jun-jie-jan-2027-.pdf"
@@ -33,7 +33,7 @@
     {
       "school": "Universiti Tunku Abdul Rahman",
       "degree": "Bachelor of Computer Science (Honours)",
-      "period": "2024 — Present",
+      "period": "2024 - Present",
       "grade": "CGPA 2.82",
       "details": [
         "Currently in Year 3, final semester.",
@@ -43,7 +43,7 @@
     {
       "school": "Universiti Tunku Abdul Rahman",
       "degree": "Foundation in Science",
-      "period": "2022 — 2023",
+      "period": "2022 - 2023",
       "grade": "CGPA 2.54",
       "details": [
         "Completed the foundation programme leading into the Computer Science degree."
@@ -54,7 +54,7 @@
     {
       "company": "Hei Hwang Food Industries (M) Sdn. Bhd.",
       "role": "Part Time Promoter",
-      "period": "Jan 2026 — Feb 2026",
+      "period": "Jan 2026 - Feb 2026",
       "location": "Penang, Malaysia",
       "summary": "Seasonal retail promotion for the Chinese New Year hamper range.",
       "highlights": [
@@ -66,7 +66,7 @@
     {
       "company": "Yin Onn Herbs",
       "role": "Part Time Promoter",
-      "period": "Jan 2025 — Feb 2025",
+      "period": "Jan 2025 - Feb 2025",
       "location": "Penang, Malaysia",
       "summary": "Customer-facing promotion of herbal products in a retail setting.",
       "highlights": [
@@ -78,7 +78,7 @@
     {
       "company": "TF Value Mart",
       "role": "Sales Assistant",
-      "period": "May 2022 — Aug 2022",
+      "period": "May 2022 - Aug 2022",
       "location": "Penang, Malaysia",
       "summary": "Retail floor support covering merchandising, stock and customer service.",
       "highlights": [
@@ -101,11 +101,11 @@
         "ArcFace",
         "PocketBase"
       ],
-      "year": "2025 — 2026",
+      "year": "2025 - 2026",
       "links": [],
       "accent": [
-        "#6366f1",
-        "#0ea5e9"
+        "#0e5a49",
+        "#0b4a52"
       ]
     },
     {
@@ -121,8 +121,8 @@
       "year": "2026",
       "links": [],
       "accent": [
-        "#10b981",
-        "#14b8a6"
+        "#116b52",
+        "#0d5744"
       ]
     },
     {
@@ -137,8 +137,8 @@
       "year": "2026",
       "links": [],
       "accent": [
-        "#f43f5e",
-        "#f59e0b"
+        "#155e63",
+        "#123f52"
       ]
     },
     {
@@ -153,8 +153,8 @@
       "year": "2025",
       "links": [],
       "accent": [
-        "#a855f7",
-        "#ec4899"
+        "#1c5450",
+        "#16403f"
       ]
     },
     {
@@ -168,8 +168,8 @@
       "year": "2024",
       "links": [],
       "accent": [
-        "#0ea5e9",
-        "#22d3ee"
+        "#0f4f5e",
+        "#0c3a4a"
       ]
     }
   ],
@@ -223,7 +223,7 @@
       "id": "about",
       "component": "About",
       "navLabel": "About",
-      "eyebrow": "About",
+      "eyebrow": "",
       "title": "A bit about me",
       "subtitle": "",
       "visible": true
@@ -232,7 +232,7 @@
       "id": "studies",
       "component": "Education",
       "navLabel": "Studies",
-      "eyebrow": "Studies",
+      "eyebrow": "",
       "title": "Education",
       "subtitle": "Where I studied and what I focused on.",
       "visible": true
@@ -241,7 +241,7 @@
       "id": "career",
       "component": "Experience",
       "navLabel": "Career",
-      "eyebrow": "Career",
+      "eyebrow": "",
       "title": "Where I've worked",
       "subtitle": "Roles, what I was responsible for, and what came out of it.",
       "visible": true
@@ -250,7 +250,7 @@
       "id": "projects",
       "component": "Projects",
       "navLabel": "Projects",
-      "eyebrow": "Projects",
+      "eyebrow": "",
       "title": "Things I've built",
       "subtitle": "Drag, click a card, or use the arrow keys to move through the stack. Details for the selected project appear below.",
       "visible": true
@@ -259,7 +259,7 @@
       "id": "skills",
       "component": "Skills",
       "navLabel": "Skills",
-      "eyebrow": "Skills",
+      "eyebrow": "",
       "title": "What I work with",
       "subtitle": "",
       "visible": true
@@ -268,9 +268,9 @@
       "id": "contact",
       "component": "Contact",
       "navLabel": "Contact",
-      "eyebrow": "Contact",
+      "eyebrow": "",
       "title": "Let's talk",
-      "subtitle": "The quickest way to reach me is email — I read everything.",
+      "subtitle": "The quickest way to reach me is email. I read everything.",
       "visible": true
     }
   ],
@@ -287,7 +287,8 @@
         "primary": "#171717",
         "primaryForeground": "#fafafa",
         "muted": "#f5f5f5",
-        "mutedForeground": "#737373"
+        "mutedForeground": "#737373",
+        "brand": "#0d6b57"
       },
       "dark": {
         "background": "#0a0a0a",
@@ -297,7 +298,8 @@
         "primary": "#e5e5e5",
         "primaryForeground": "#171717",
         "muted": "#262626",
-        "mutedForeground": "#a1a1a1"
+        "mutedForeground": "#a1a1a1",
+        "brand": "#4ecfa4"
       }
     }
   }
