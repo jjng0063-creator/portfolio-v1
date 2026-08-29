@@ -34,8 +34,9 @@ export const FONTS = {
 export const COLOR_TOKENS = [
   { key: 'background', cssVar: '--background', label: 'Page background' },
   { key: 'foreground', cssVar: '--foreground', label: 'Body text' },
-  { key: 'primary', cssVar: '--primary', label: 'Accent' },
-  { key: 'primaryForeground', cssVar: '--primary-foreground', label: 'Text on accent' },
+  { key: 'primary', cssVar: '--primary', label: 'Buttons and primary fills' },
+  { key: 'brand', cssVar: '--brand', label: 'Brand accent' },
+  { key: 'primaryForeground', cssVar: '--primary-foreground', label: 'Text on buttons' },
   { key: 'card', cssVar: '--card', label: 'Card background' },
   { key: 'border', cssVar: '--border', label: 'Borders' },
   { key: 'muted', cssVar: '--muted', label: 'Muted background' },
