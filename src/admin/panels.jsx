@@ -99,6 +99,13 @@ export function ContactPanel() {
   return (
     <Stack>
       <TextField path={['contact', 'email']} label="Email" type="email" />
+      <TextField
+        path={['contact', 'whatsapp']}
+        label="WhatsApp"
+        type="tel"
+        placeholder="+60 12-345 6789"
+        hint="International format, starting with the country code. A number beginning with a trunk zero is not shown, because the link would reach the wrong person. Leave empty to hide the channel."
+      />
       <Repeater
         path={['contact', 'links']}
         label="Links"
