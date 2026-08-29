@@ -1,7 +1,5 @@
 import Section from '@/components/Section'
 import SectionHeading from '@/components/SectionHeading'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { education } from '@/data/profile'
 
 export default function Education({ id, eyebrow, title, subtitle }) {
@@ -11,34 +9,35 @@ export default function Education({ id, eyebrow, title, subtitle }) {
         {subtitle}
       </SectionHeading>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      {/* Divided rows rather than cards: two entries do not need elevation to
+          read as separate things, and a hairline per group beats a box each. */}
+      <div className="border-t border-border/60">
         {education.map((ed, i) => (
-          <Card key={i} className="bg-card/50">
-            <CardContent className="pt-6">
-              <div className="flex flex-wrap items-start justify-between gap-2">
-                <h3 className="text-lg font-medium">{ed.school}</h3>
-                <span className="font-mono text-xs text-muted-foreground">
-                  {ed.period}
-                </span>
-              </div>
-              <p className="mt-1 text-primary">{ed.degree}</p>
+          <article
+            key={i}
+            data-reveal=""
+            className="grid gap-3 border-b border-border/60 py-8 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-4">
+              <h3 className="font-medium text-pretty">{ed.school}</h3>
+              <p className="tnum mt-1 text-sm text-muted-foreground">{ed.period}</p>
+            </div>
+
+            <div className="md:col-span-8">
+              <p className="text-pretty">{ed.degree}</p>
               {ed.grade && (
-                <Badge variant="secondary" className="mt-3">
-                  {ed.grade}
-                </Badge>
+                <p className="tnum mt-1 text-sm text-muted-foreground">{ed.grade}</p>
               )}
               {ed.details?.length > 0 && (
-                <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                <ul className="mt-4 list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-brand/60">
                   {ed.details.map((d, j) => (
-                    <li key={j} className="flex gap-2">
-                      <span className="mt-2 size-1 shrink-0 rounded-full bg-primary/70" />
-                      <span>{d}</span>
+                    <li key={j} className="pl-1 text-pretty">
+                      {d}
                     </li>
                   ))}
                 </ul>
               )}
-            </CardContent>
-          </Card>
+            </div>
+          </article>
         ))}
       </div>
     </Section>

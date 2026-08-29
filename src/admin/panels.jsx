@@ -211,7 +211,7 @@ export function ProjectsPanel() {
           stack: [],
           year: '',
           links: [],
-          accent: ['#6366f1', '#0ea5e9'],
+          accent: ['#0e5a49', '#0b4a52'],
         })}>
         {itemPath => (
           <>
