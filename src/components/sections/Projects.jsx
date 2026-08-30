@@ -153,8 +153,19 @@ export default function Projects({ id, eyebrow, title, subtitle }) {
       {current && (
         <div className="mt-10 rounded-xl border border-border bg-card/50 p-6 sm:p-8">
           <div ref={panelRef}>
+            {/*
+             * Scoped to the title/year row by 48b69f2, and deliberately left
+             * that way. The description, badges and links change with it, but
+             * announcing all of them on every rotation reads a paragraph of
+             * speech per slide; the title, kind and year are the summary a
+             * reader needs to decide whether to go and read the rest.
+             *
+             * aria-atomic because both children always change together: it
+             * has the row announced as one unit rather than as two fragments.
+             */}
             <div
               aria-live="polite"
+              aria-atomic="true"
               className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <h3 className="text-xl font-medium text-pretty">{current.title}</h3>
               <span className="tnum text-sm text-muted-foreground">
