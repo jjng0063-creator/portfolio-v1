@@ -335,7 +335,7 @@ export default function SkewedCarousel({
               onClick={() => {
                 if (!dragRef.current?.moved) focusIndex(i)
               }}
-              className="absolute left-1/2 top-1/2 cursor-pointer overflow-hidden bg-[#0b0d12] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.8)] [backface-visibility:hidden] [will-change:transform,opacity]"
+              className="group absolute left-1/2 top-1/2 cursor-pointer overflow-hidden bg-[#0b0d12] shadow-[0_30px_60px_-25px_rgba(0,0,0,0.8)] [backface-visibility:hidden] [will-change:transform,opacity]"
               style={{ width: cardWidth, height: cardHeight, borderRadius: radius }}
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${count}`}
@@ -350,6 +350,12 @@ export default function SkewedCarousel({
                   draggable={false}
                 />
               )}
+
+              {/* Sits under the caption so it never washes out that text. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 bg-white/0 transition-colors duration-300 group-hover:bg-white/10"
+              />
 
               {item.caption && (
                 <div

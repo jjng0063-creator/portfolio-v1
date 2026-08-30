@@ -12,13 +12,13 @@ export default function Experience({ id, eyebrow, title, subtitle }) {
 
       <ol className="relative border-l border-border pl-8">
         {experience.map((job, i) => (
-          <li key={i} className="pb-12 last:pb-0">
+          <li key={i} className="group pb-12 last:pb-0">
             {/* Positioned against the <ol>, so the reveal transform below must
                 stay off the <li> or it would become the containing block and
                 pull every node off the rail. */}
             <span
               aria-hidden
-              className="absolute -left-[6.5px] mt-2 size-3 rounded-full border-2 border-background bg-brand"
+              className="absolute -left-[6.5px] mt-2 size-3 rounded-full border-2 border-background bg-brand transition-transform duration-300 ease-out motion-safe:group-hover:scale-125"
             />
 
             <div data-reveal="">
