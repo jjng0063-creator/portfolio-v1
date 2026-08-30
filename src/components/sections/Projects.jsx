@@ -41,7 +41,7 @@ function ProjectCard({ project }) {
             </span>
           ))}
         </div>
-        <p className="tnum mt-3 text-[11px] text-white/60">{project.year}</p>
+        <p className="tnum mt-3 text-[11px] text-white/80">{project.year}</p>
       </div>
     </div>
   )
@@ -107,10 +107,10 @@ export default function Projects({ id, eyebrow, title, subtitle }) {
       </div>
 
       {current && (
-        <div
-          aria-live="polite"
-          className="mt-10 rounded-xl border border-border bg-card/50 p-6 sm:p-8">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div className="mt-10 rounded-xl border border-border bg-card/50 p-6 sm:p-8">
+          <div
+            aria-live="polite"
+            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
             <h3 className="text-xl font-medium text-pretty">{current.title}</h3>
             <span className="tnum text-sm text-muted-foreground">
               {current.kind}, {current.year}
