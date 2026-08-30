@@ -9,6 +9,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState(LINKS[0]?.id ?? '')
   const sentinel = useRef(null)
+  const endSentinel = useRef(null)
 
   // A 1px marker sitting 24px down the page. Once it leaves the viewport the
   // header has something behind it and earns its background. IntersectionObserver
@@ -25,39 +26,78 @@ export default function Nav() {
     return () => io.disconnect()
   }, [])
 
-  // Which section the reader is actually looking at. Ratios are kept per id so
-  // that when two sections straddle the viewport the larger one wins, instead
-  // of the link flickering between them.
+  // Which section the reader is actually looking at: whichever one covers most
+  // of a band running from under the header to part-way down the viewport.
   useEffect(() => {
     const els = LINKS.map(l => document.getElementById(l.id)).filter(Boolean)
     if (!els.length) return
 
-    const ratios = new Map()
-    const io = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0)
-        }
-        let best = ''
-        let bestRatio = 0
-        for (const [id, ratio] of ratios) {
-          if (ratio > bestRatio) {
-            bestRatio = ratio
-            best = id
-          }
-        }
-        if (best) setActive(best)
-      },
-      { threshold: [0.1, 0.4, 0.75], rootMargin: '-72px 0px -40% 0px' }
-    )
+    const HEADER = 72
+    const CROP = 0.4
 
+    // Measured fresh on every callback rather than cached per entry. An
+    // observer only reports a section when it crosses a threshold, so a stored
+    // ratio is a snapshot from whenever that last happened, and it drifts
+    // arbitrarily far from the truth while the section keeps moving.
+    const pick = () => {
+      const vh = window.innerHeight
+      const doc = document.documentElement
+
+      // The bottom crop stops a section that is barely peeking in from the
+      // bottom edge from taking the highlight early. Once the document has run
+      // out of scroll nothing can peek in any more, and keeping the crop there
+      // leaves the final section permanently unreachable: it can never climb
+      // further up the band, because the page has stopped moving.
+      const atEnd = Math.ceil(window.scrollY + vh) >= doc.scrollHeight - 1
+      const top = HEADER
+      const bottom = atEnd ? vh : vh * (1 - CROP)
+
+      // How much of the band each section covers, not intersectionRatio: a
+      // ratio is a fraction of the section's own height, so a short section
+      // sitting wholly inside the band would outrank a tall one filling it.
+      let best = ''
+      let bestCovered = 0
+      for (const el of els) {
+        const r = el.getBoundingClientRect()
+        const covered = Math.min(r.bottom, bottom) - Math.max(r.top, top)
+        // >= so that when two sections cover the band equally the lower one
+        // wins: the reader has moved down into it, not back up out of it.
+        if (covered > 0 && covered >= bestCovered) {
+          bestCovered = covered
+          best = el.id
+        }
+      }
+      return best
+    }
+
+    const sync = () => {
+      const next = pick()
+      if (next) setActive(next)
+    }
+
+    const io = new IntersectionObserver(sync, {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+      rootMargin: `-${HEADER}px 0px -${CROP * 100}% 0px`,
+    })
     els.forEach(el => io.observe(el))
-    return () => io.disconnect()
+
+    // The last section stops crossing thresholds before the page stops
+    // scrolling, so nothing above would re-run pick() over the final stretch.
+    // This marker sits below the footer and reports when the end is on screen.
+    const end = endSentinel.current
+    const endIo = end && new IntersectionObserver(sync, { threshold: 0 })
+    if (endIo) endIo.observe(end)
+
+    return () => {
+      io.disconnect()
+      if (endIo) endIo.disconnect()
+    }
   }, [])
 
   return (
     <>
       <div ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-6 h-px w-px" />
+      <div ref={endSentinel} aria-hidden className="pointer-events-none absolute bottom-0 left-0 h-px w-px" />
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
           scrolled ? 'border-b border-border/60 bg-background/80 backdrop-blur-md' : ''
