@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { animate } from 'animejs'
 import SkewedCarousel from '@/components/SkewedCarousel'
 import Section from '@/components/Section'
 import SectionHeading from '@/components/SectionHeading'
@@ -85,6 +86,49 @@ export default function Projects({ id, eyebrow, title, subtitle }) {
 
   const current = projects[active] ?? projects[0]
 
+  const panelRef = useRef(null)
+  const settled = useRef(false)
+
+  // Rotating the carousel swaps the whole panel at once, which reads as a
+  // flicker. Fading the new copy in over ~400ms gives the eye something to
+  // follow. Only the contents move: the card chrome and the live region stay
+  // mounted, so the announcement still fires and the border never blinks.
+  //
+  // The resting state is "no inline styles at all". Every exit from this
+  // effect clears them, because a fade that starts at opacity 0 and stops
+  // early would otherwise leave the copy invisible -- the same trap
+  // src/lib/reveal.js is written to avoid.
+  useEffect(() => {
+    const el = panelRef.current
+    if (!el) return
+
+    // Nothing has changed on the first pass, and this section is below the
+    // fold on load, so the opening fade would only ever play unseen.
+    if (!settled.current) {
+      settled.current = true
+      return
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // anime parks its engine while the document is hidden (see its
+    // engine.js: `doc.hidden ? engine.pause() : engine.resume()`), which
+    // strands the tween on its first frame. Nobody is looking at a hidden
+    // tab, so swap outright rather than hand the reader a blank panel.
+    if (document.hidden) return
+
+    const fade = animate(el, {
+      opacity: [0, 1],
+      translateY: [8, 0],
+      duration: 420,
+      ease: 'outExpo',
+      onComplete: () => el.removeAttribute('style'),
+    })
+
+    // Spinning the carousel faster than 420ms lands here: revert cancels the
+    // in-flight fade and restores the element before the next one starts.
+    return () => fade.revert()
+  }, [active])
+
   return (
     <Section id={id}>
       <SectionHeading eyebrow={eyebrow} title={title}>
@@ -108,40 +152,42 @@ export default function Projects({ id, eyebrow, title, subtitle }) {
 
       {current && (
         <div className="mt-10 rounded-xl border border-border bg-card/50 p-6 sm:p-8">
-          <div
-            aria-live="polite"
-            className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="text-xl font-medium text-pretty">{current.title}</h3>
-            <span className="tnum text-sm text-muted-foreground">
-              {current.kind}, {current.year}
-            </span>
+          <div ref={panelRef}>
+            <div
+              aria-live="polite"
+              className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 className="text-xl font-medium text-pretty">{current.title}</h3>
+              <span className="tnum text-sm text-muted-foreground">
+                {current.kind}, {current.year}
+              </span>
+            </div>
+
+            <p className="mt-4 max-w-[68ch] text-pretty leading-relaxed text-muted-foreground">
+              {current.description}
+            </p>
+
+            {current.stack?.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-2">
+                {current.stack.map(t => (
+                  <Badge key={t} variant="outline">
+                    {t}
+                  </Badge>
+                ))}
+              </div>
+            )}
+
+            {current.links?.length > 0 && (
+              <div className="mt-6 flex flex-wrap gap-3">
+                {current.links.map(l => (
+                  <Button key={l.href} size="sm" variant="outline" asChild>
+                    <a href={l.href} target="_blank" rel="noreferrer">
+                      {l.label}
+                    </a>
+                  </Button>
+                ))}
+              </div>
+            )}
           </div>
-
-          <p className="mt-4 max-w-[68ch] text-pretty leading-relaxed text-muted-foreground">
-            {current.description}
-          </p>
-
-          {current.stack?.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-2">
-              {current.stack.map(t => (
-                <Badge key={t} variant="outline">
-                  {t}
-                </Badge>
-              ))}
-            </div>
-          )}
-
-          {current.links?.length > 0 && (
-            <div className="mt-6 flex flex-wrap gap-3">
-              {current.links.map(l => (
-                <Button key={l.href} size="sm" variant="outline" asChild>
-                  <a href={l.href} target="_blank" rel="noreferrer">
-                    {l.label}
-                  </a>
-                </Button>
-              ))}
-            </div>
-          )}
         </div>
       )}
     </Section>

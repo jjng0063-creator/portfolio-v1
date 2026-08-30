@@ -24,7 +24,7 @@ export default function Skills({ id, eyebrow, title, subtitle }) {
               {g.items.map((s, i) => (
                 <li
                   key={`${s}-${i}`}
-                  className="rounded-md border border-border px-2.5 py-1 text-sm">
+                  className="rounded-md border border-border px-2.5 py-1 text-sm transition-colors duration-200 hover:border-brand/50 hover:bg-brand/5">
                   {s}
                 </li>
               ))}
