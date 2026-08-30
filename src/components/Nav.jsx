@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { profile, sections } from '@/data/profile'
 
 // Mirrors the visible sections from src/data/site.json, so hiding or
@@ -8,15 +8,14 @@ const LINKS = sections.map(s => ({ id: s.id, label: s.navLabel || s.title }))
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState(LINKS[0]?.id ?? '')
-  const sentinel = useRef(null)
-  const endSentinel = useRef(null)
 
   // A 1px marker sitting 24px down the page. Once it leaves the viewport the
   // header has something behind it and earns its background. IntersectionObserver
   // rather than a scroll listener: no work on the scroll frame, no re-render
   // storm on mobile.
   useEffect(() => {
-    const el = sentinel.current
+    // Rendered by App inside #smooth-content, not here: see the note there.
+    const el = document.getElementById('nav-top-marker')
     if (!el) return
     const io = new IntersectionObserver(
       ([entry]) => setScrolled(!entry.isIntersecting),
@@ -84,7 +83,7 @@ export default function Nav() {
     // The last section stops crossing thresholds before the page stops
     // scrolling, so nothing above would re-run pick() over the final stretch.
     // This marker sits below the footer and reports when the end is on screen.
-    const end = endSentinel.current
+    const end = document.getElementById('nav-end-marker')
     const endIo = end && new IntersectionObserver(sync, { threshold: 0 })
     if (endIo) endIo.observe(end)
 
@@ -96,8 +95,6 @@ export default function Nav() {
 
   return (
     <>
-      <div ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-6 h-px w-px" />
-      <div ref={endSentinel} aria-hidden className="pointer-events-none absolute bottom-0 left-0 h-px w-px" />
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
           scrolled ? 'border-b border-border/60 bg-background/80 backdrop-blur-md' : ''
