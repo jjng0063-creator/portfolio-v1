@@ -13,7 +13,7 @@ import site from './site.json'
 const withBase = path => {
   if (!path) return null
   // Absolute URLs (an externally hosted photo, say) are left alone. Everything
-  // else is a path inside public/, which needs the /portfolio/ base prefix —
+  // else is a path inside public/, which needs the /portfolio-v1/ base prefix —
   // a bare '/me.jpg' would 404, since the site is served from a subpath.
   if (/^(https?:)?\/\//.test(path) || path.startsWith('data:')) return path
   return import.meta.env.BASE_URL + path.replace(/^\/+/, '')

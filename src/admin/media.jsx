@@ -1,6 +1,6 @@
 // Photo and résumé upload. The file is committed straight into public/uploads/
 // on the repo, and the field stores the path relative to public/ — the site
-// prefixes it with the /portfolio/ base at render time.
+// prefixes it with the /portfolio-v1/ base at render time.
 import { useContext, useId, useRef, useState } from 'react'
 import { Upload, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'

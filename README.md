@@ -1,7 +1,7 @@
 # Personal Portfolio — Ng Jun Jie
 
 A single-page portfolio site covering my studies, work experience and projects.
-Here's the website Url: https://jjng0063-creator.github.io/portfolio/
+Here's the website Url: https://jjng0063-creator.github.io/portfolio-v1/
 
 Built with React 19, Vite and Tailwind CSS v4, with [shadcn/ui](https://ui.shadcn.com)
 components. The projects section uses a custom coverflow-style carousel written
@@ -33,7 +33,7 @@ are two ways to change it.
 
 ### The admin panel
 
-Open `/admin.html` on the live site (or http://localhost:5173/portfolio/admin.html
+Open `/admin.html` on the live site (or http://localhost:5173/portfolio-v1/admin.html
 in dev) and sign in with a GitHub token. Editing there commits `site.json` back
 to this repository, which triggers the normal Actions deploy, so changes are live
 about a minute later. There is no server involved: the page talks to the GitHub

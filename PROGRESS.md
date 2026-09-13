@@ -2,7 +2,7 @@
 
 **Project:** `about-me` — single-page portfolio site for Ng Jun Jie
 **Last updated:** 21 August 2026
-**Status:** Deployed and live at https://jjng0063-creator.github.io/portfolio/
+**Status:** Deployed and live at https://jjng0063-creator.github.io/portfolio-v1/
 
 ---
 
@@ -82,7 +82,7 @@ Management System, Stock Management System, Student Exam System), 4 skill groups
       `index.html` and needs nothing.
 
 **Deployment**
-- [x] Live at https://jjng0063-creator.github.io/portfolio/ — GitHub Pages,
+- [x] Live at https://jjng0063-creator.github.io/portfolio-v1/ — GitHub Pages,
       published by `.github/workflows/deploy.yml` on every push to `main`.
       The workflow runs lint and build, then uploads `dist/` via the Pages
       OIDC deploy action. `dist/` stays gitignored; nothing is committed.

@@ -135,10 +135,10 @@ function siteHtmlPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Served from https://jjng0063-creator.github.io/portfolio/, so every asset
+  // Served from https://jjng0063-creator.github.io/portfolio-v1/, so every asset
   // URL needs the repo name prefixed. Use import.meta.env.BASE_URL to build
   // paths to files in public/ rather than hardcoding a leading slash.
-  base: '/portfolio/',
+  base: '/portfolio-v1/',
   plugins: [react(), tailwindcss(), siteHtmlPlugin()],
   resolve: {
     alias: {
